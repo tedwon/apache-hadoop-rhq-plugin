@@ -10,5 +10,75 @@
 
     <depends plugin="JMX" useClasses="true"/>
 
+    <service name="NameNode"
+             description="NameNode"
+             discovery="org.rhq.plugins.jmx.MBeanResourceDiscoveryComponent"
+             class="org.rhq.plugins.jmx.MBeanResourceComponent">
+
+        <runs-inside>
+            <parent-resource-type name="JMX Server" plugin="JMX"/>
+        </runs-inside>
+
+        <plugin-configuration>
+            <c:simple-property name="objectName" default="Hadoop:service=NameNode,name=NameNode"/>
+        </plugin-configuration>
+
+        <metric property="AddBlockOps"
+                displayName="AddBlockOps"
+                defaultOn="true"
+                displayType="summary"
+                defaultInterval="60000"
+                units="none"
+                description="AddBlockOps"/>
+
+        <metric displayName="tag.context" property="tag.context"
+                description="tag.context"
+                dataType="trait" displayType="summary"/>
+
+        <metric displayName="tag.hostName" property="tag.hostName"
+                description="tag.hostName"
+                dataType="trait" displayType="summary"/>
+
+    </service>
+
+    <service name="FSNamesystemState"
+             description="FSNamesystemState"
+             discovery="org.rhq.plugins.jmx.MBeanResourceDiscoveryComponent"
+             class="org.rhq.plugins.jmx.MBeanResourceComponent">
+
+        <runs-inside>
+            <parent-resource-type name="JMX Server" plugin="JMX"/>
+        </runs-inside>
+
+        <plugin-configuration>
+            <c:simple-property name="objectName" default="Hadoop:service=NameNode,name=FSNamesystemState"/>
+        </plugin-configuration>
+
+        <metric property="CapacityTotal"
+                displayName="CapacityTotal"
+                defaultOn="true"
+                displayType="summary"
+                defaultInterval="3600000"
+                units="bytes"
+                description="DFS Configured capacitiy"/>
+
+        <metric property="CapacityUsed"
+                displayName="CapacityUsed"
+                defaultOn="true"
+                displayType="summary"
+                defaultInterval="3600000"
+                units="bytes"
+                description="DFS used"/>
+
+        <metric property="CapacityRemaining"
+                displayName="CapacityRemaining"
+                defaultOn="true"
+                displayType="summary"
+                defaultInterval="3600000"
+                units="bytes"
+                description="DFS remaining"/>
+
+    </service>
+
 
 </plugin>
