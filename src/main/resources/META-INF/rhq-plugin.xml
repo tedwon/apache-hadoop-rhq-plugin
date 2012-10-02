@@ -31,12 +31,111 @@
                 units="none"
                 description="AddBlockOps"/>
 
+        <metric property="CreateFileOps"
+                displayName="CreateFileOps"
+                defaultOn="true"
+                displayType="summary"
+                defaultInterval="60000"
+                units="none"
+                description="CreateFileOps"/>
+
+        <metric property="DeleteFileOps"
+                displayName="DeleteFileOps"
+                defaultOn="true"
+                displayType="summary"
+                defaultInterval="60000"
+                units="none"
+                description="DeleteFileOps"/>
+
+        <metric property="FileInfoOps"
+                displayName="FileInfoOps"
+                defaultOn="true"
+                displayType="summary"
+                defaultInterval="60000"
+                units="none"
+                description="FileInfoOps"/>
+
+        <metric property="FilesAppended"
+                displayName="FilesAppended"
+                defaultOn="true"
+                displayType="summary"
+                defaultInterval="60000"
+                units="none"
+                description="FilesAppended"/>
+
+        <metric property="FilesCreated"
+                displayName="FilesCreated"
+                defaultOn="true"
+                displayType="summary"
+                defaultInterval="60000"
+                units="none"
+                description="FilesCreated"/>
+
+        <metric property="FilesDeleted"
+                displayName="FilesDeleted"
+                defaultOn="true"
+                displayType="summary"
+                defaultInterval="60000"
+                units="none"
+                description="FilesDeleted"/>
+
+        <metric property="FilesInGetListingOps"
+                displayName="FilesInGetListingOps"
+                defaultOn="true"
+                displayType="summary"
+                defaultInterval="60000"
+                units="none"
+                description="FilesInGetListingOps"/>
+
+        <metric property="FilesRenamed"
+                displayName="FilesRenamed"
+                defaultOn="true"
+                displayType="summary"
+                defaultInterval="60000"
+                units="none"
+                description="FilesRenamed"/>
+
         <metric displayName="tag.context" property="tag.context"
                 description="tag.context"
                 dataType="trait" displayType="summary"/>
 
         <metric displayName="tag.hostName" property="tag.hostName"
                 description="tag.hostName"
+                dataType="trait" displayType="summary"/>
+
+    </service>
+
+    <service name="NameNodeInfo"
+             description="NameNodeInfo"
+             discovery="org.rhq.plugins.jmx.MBeanResourceDiscoveryComponent"
+             class="org.rhq.plugins.jmx.MBeanResourceComponent">
+
+        <runs-inside>
+            <parent-resource-type name="JMX Server" plugin="JMX"/>
+        </runs-inside>
+
+        <plugin-configuration>
+            <c:simple-property name="objectName" default="Hadoop:service=NameNode,name=NameNodeInfo"/>
+        </plugin-configuration>
+
+        <metric property="Free"
+                displayName="Free"
+                defaultOn="true"
+                displayType="summary"
+                defaultInterval="3600000"
+                units="bytes"
+                description="Free"/>
+
+        <metric property="PercentRemaining"
+                displayName="PercentRemaining"
+                defaultOn="true"
+                displayType="summary"
+                defaultInterval="3600000"
+                units="percentage"
+                description="DFS Remaining%"/>
+
+        <metric displayName="Version" property="Version"
+                description="Version"
                 dataType="trait" displayType="summary"/>
 
     </service>
@@ -78,7 +177,30 @@
                 units="bytes"
                 description="DFS remaining"/>
 
-    </service>
+        <metric property="BlocksTotal"
+                displayName="BlocksTotal"
+                defaultOn="true"
+                displayType="summary"
+                defaultInterval="3600000"
+                units="none"
+                description="BlocksTotal"/>
 
+        <metric property="FilesTotal"
+                displayName="FilesTotal"
+                defaultOn="true"
+                displayType="summary"
+                defaultInterval="3600000"
+                units="none"
+                description="FilesTotal"/>
+
+        <metric property="PendingReplicationBlocks"
+                displayName="PendingReplicationBlocks"
+                defaultOn="true"
+                displayType="summary"
+                defaultInterval="3600000"
+                units="none"
+                description="PendingReplicationBlocks"/>
+
+    </service>
 
 </plugin>
