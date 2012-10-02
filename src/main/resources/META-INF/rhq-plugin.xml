@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<plugin name="Apache-Hadoop-RHQ-Plugin"
+        displayName="Apache Hadoop RHQ Plugin"
+        description="Apache Hadoop RHQ Plugin"
+        version="0.1"
+        xsi:noNamespaceSchemaLocation="rhq-plugin.xsd"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="urn:xmlns:rhq-plugin"
+        xmlns:c="urn:xmlns:rhq-configuration">
+
+    <depends plugin="JMX" useClasses="true"/>
+
+
+</plugin>
