@@ -203,4 +203,80 @@
 
     </service>
 
+
+    <service name="DataNode"
+             description="DataNode"
+             discovery="org.rhq.plugins.jmx.MBeanResourceDiscoveryComponent"
+             class="org.rhq.plugins.jmx.MBeanResourceComponent">
+
+        <runs-inside>
+            <parent-resource-type name="JMX Server" plugin="JMX"/>
+        </runs-inside>
+
+        <plugin-configuration>
+            <c:simple-property name="objectName" default="Hadoop:service=DataNode,name=DataNode"/>
+        </plugin-configuration>
+
+        <metric property="bytes_read"
+                displayName="bytes_read"
+                defaultOn="true"
+                displayType="summary"
+                defaultInterval="60000"
+                units="bytes"
+                description="bytes_read"/>
+
+        <metric property="bytes_written"
+                displayName="bytes_written"
+                defaultOn="true"
+                displayType="summary"
+                defaultInterval="60000"
+                units="bytes"
+                description="bytes_written"/>
+
+    </service>
+
+    <service name="FSDatasetState"
+             description="FSDatasetState"
+             discovery="org.rhq.plugins.jmx.MBeanResourceDiscoveryComponent"
+             class="org.rhq.plugins.jmx.MBeanResourceComponent">
+
+        <runs-inside>
+            <parent-resource-type name="JMX Server" plugin="JMX"/>
+        </runs-inside>
+
+        <plugin-configuration>
+            <c:simple-property name="objectName"
+                               default="Hadoop:service=DataNode,name=FSDatasetState*"/>
+        </plugin-configuration>
+
+        <metric property="Capacity"
+                displayName="Capacity"
+                defaultOn="true"
+                displayType="summary"
+                defaultInterval="600000"
+                units="bytes"
+                description="Capacity"/>
+
+        <metric property="DfsUsed"
+                displayName="DfsUsed"
+                defaultOn="true"
+                displayType="summary"
+                defaultInterval="600000"
+                units="bytes"
+                description="DfsUsed"/>
+
+        <metric property="Remaining"
+                displayName="Remaining"
+                defaultOn="true"
+                displayType="summary"
+                defaultInterval="600000"
+                units="bytes"
+                description="Remaining"/>
+
+        <metric displayName="StorageInfo" property="StorageInfo"
+                description="StorageInfo"
+                dataType="trait" displayType="summary"/>
+
+    </service>
+
 </plugin>
