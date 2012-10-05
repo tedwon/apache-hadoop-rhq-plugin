@@ -10,6 +10,7 @@
 
     <depends plugin="JMX" useClasses="true"/>
 
+    <!-- NameNode -->
     <service name="NameNode"
              description="NameNode"
              discovery="org.rhq.plugins.jmx.MBeanResourceDiscoveryComponent"
@@ -203,7 +204,86 @@
 
     </service>
 
+    <service name="NameNode.jvm"
+             description="NameNode.jvm"
+             discovery="org.rhq.plugins.jmx.MBeanResourceDiscoveryComponent"
+             class="org.rhq.plugins.jmx.MBeanResourceComponent">
 
+        <runs-inside>
+            <parent-resource-type name="JMX Server" plugin="JMX"/>
+        </runs-inside>
+
+        <plugin-configuration>
+            <c:simple-property name="objectName" default="Hadoop:service=NameNode,name=jvm"/>
+        </plugin-configuration>
+
+        <metric property="gcCount"
+                displayName="gcCount"
+                defaultOn="true"
+                displayType="summary"
+                defaultInterval="600000"
+                units="none"
+                description="gcCount"/>
+
+        <metric property="gcTimeMillis"
+                displayName="gcTimeMillis"
+                defaultOn="true"
+                displayType="summary"
+                defaultInterval="600000"
+                units="milliseconds"
+                description="gcTimeMillis"/>
+
+        <metric property="memHeapCommittedM"
+                displayName="memHeapCommittedM"
+                defaultOn="true"
+                displayType="summary"
+                defaultInterval="600000"
+                units="megabits"
+                description="memHeapCommittedM"/>
+
+        <metric property="memHeapUsedM"
+                displayName="memHeapUsedM"
+                defaultOn="true"
+                displayType="summary"
+                defaultInterval="600000"
+                units="megabits"
+                description="memHeapUsedM"/>
+
+        <metric property="memNonHeapCommittedM"
+                displayName="memNonHeapCommittedM"
+                defaultOn="true"
+                displayType="summary"
+                defaultInterval="600000"
+                units="megabits"
+                description="memNonHeapCommittedM"/>
+
+        <metric property="memNonHeapUsedM"
+                displayName="memNonHeapUsedM"
+                defaultOn="true"
+                displayType="summary"
+                defaultInterval="600000"
+                units="megabits"
+                description="memNonHeapUsedM"/>
+
+        <metric displayName="tag.context" property="tag.context"
+                description="tag.context"
+                dataType="trait" displayType="summary"/>
+
+        <metric displayName="tag.hostName" property="tag.hostName"
+                description="tag.hostName"
+                dataType="trait" displayType="summary"/>
+
+        <metric displayName="tag.sessionId" property="tag.sessionId"
+                description="tag.sessionId"
+                dataType="trait" displayType="summary"/>
+
+        <metric displayName="tag.processName" property="tag.processName"
+                description="tag.processName"
+                dataType="trait" displayType="summary"/>
+
+    </service>
+
+    <!-- DataNode -->
     <service name="DataNode"
              description="DataNode"
              discovery="org.rhq.plugins.jmx.MBeanResourceDiscoveryComponent"
@@ -275,6 +355,503 @@
 
         <metric displayName="StorageInfo" property="StorageInfo"
                 description="StorageInfo"
+                dataType="trait" displayType="summary"/>
+
+    </service>
+
+    <service name="DataNode.jvm"
+             description="DataNode.jvm"
+             discovery="org.rhq.plugins.jmx.MBeanResourceDiscoveryComponent"
+             class="org.rhq.plugins.jmx.MBeanResourceComponent">
+
+        <runs-inside>
+            <parent-resource-type name="JMX Server" plugin="JMX"/>
+        </runs-inside>
+
+        <plugin-configuration>
+            <c:simple-property name="objectName" default="Hadoop:service=DataNode,name=jvm"/>
+        </plugin-configuration>
+
+        <metric property="gcCount"
+                displayName="gcCount"
+                defaultOn="true"
+                displayType="summary"
+                defaultInterval="600000"
+                units="none"
+                description="gcCount"/>
+
+        <metric property="gcTimeMillis"
+                displayName="gcTimeMillis"
+                defaultOn="true"
+                displayType="summary"
+                defaultInterval="600000"
+                units="milliseconds"
+                description="gcTimeMillis"/>
+
+        <metric property="memHeapCommittedM"
+                displayName="memHeapCommittedM"
+                defaultOn="true"
+                displayType="summary"
+                defaultInterval="600000"
+                units="megabits"
+                description="memHeapCommittedM"/>
+
+        <metric property="memHeapUsedM"
+                displayName="memHeapUsedM"
+                defaultOn="true"
+                displayType="summary"
+                defaultInterval="600000"
+                units="megabits"
+                description="memHeapUsedM"/>
+
+        <metric property="memNonHeapCommittedM"
+                displayName="memNonHeapCommittedM"
+                defaultOn="true"
+                displayType="summary"
+                defaultInterval="600000"
+                units="megabits"
+                description="memNonHeapCommittedM"/>
+
+        <metric property="memNonHeapUsedM"
+                displayName="memNonHeapUsedM"
+                defaultOn="true"
+                displayType="summary"
+                defaultInterval="600000"
+                units="megabits"
+                description="memNonHeapUsedM"/>
+
+        <metric displayName="tag.context" property="tag.context"
+                description="tag.context"
+                dataType="trait" displayType="summary"/>
+
+        <metric displayName="tag.hostName" property="tag.hostName"
+                description="tag.hostName"
+                dataType="trait" displayType="summary"/>
+
+        <metric displayName="tag.sessionId" property="tag.sessionId"
+                description="tag.sessionId"
+                dataType="trait" displayType="summary"/>
+
+        <metric displayName="tag.processName" property="tag.processName"
+                description="tag.processName"
+                dataType="trait" displayType="summary"/>
+
+    </service>
+
+
+    <!-- JobTracker -->
+    <service name="JobTrackerInfo"
+             description="JobTrackerInfo"
+             discovery="org.rhq.plugins.jmx.MBeanResourceDiscoveryComponent"
+             class="org.rhq.plugins.jmx.MBeanResourceComponent">
+
+        <runs-inside>
+            <parent-resource-type name="JMX Server" plugin="JMX"/>
+        </runs-inside>
+
+        <plugin-configuration>
+            <c:simple-property name="objectName" default="Hadoop:service=JobTracker,name=JobTrackerInfo"/>
+        </plugin-configuration>
+
+        <metric displayName="AliveNodesInfoJson" property="AliveNodesInfoJson"
+                description="AliveNodesInfoJson"
+                dataType="trait" displayType="summary"/>
+
+        <metric displayName="BlacklistedNodesInfoJson" property="BlacklistedNodesInfoJson"
+                description="BlacklistedNodesInfoJson"
+                dataType="trait" displayType="summary"/>
+
+        <metric displayName="ConfigVersion" property="ConfigVersion"
+                description="ConfigVersion"
+                dataType="trait" displayType="summary"/>
+
+        <metric displayName="GraylistedNodesInfoJson" property="GraylistedNodesInfoJson"
+                description="GraylistedNodesInfoJson"
+                dataType="trait" displayType="summary"/>
+
+        <metric displayName="Hostname" property="Hostname"
+                description="Hostname"
+                dataType="trait" displayType="summary"/>
+
+        <metric displayName="QueueInfoJson" property="QueueInfoJson"
+                description="QueueInfoJson"
+                dataType="trait" displayType="summary"/>
+
+        <metric displayName="SummaryJson" property="SummaryJson"
+                description="SummaryJson"
+                dataType="trait" displayType="summary"/>
+
+        <metric displayName="Version" property="Version"
+                description="Version"
+                dataType="trait" displayType="summary"/>
+
+        <metric property="ThreadCount"
+                displayName="ThreadCount"
+                defaultOn="true"
+                displayType="summary"
+                defaultInterval="600000"
+                units="none"
+                description="ThreadCount"/>
+
+    </service>
+
+    <service name="JobTrackerMetrics"
+             description="JobTrackerMetrics"
+             discovery="org.rhq.plugins.jmx.MBeanResourceDiscoveryComponent"
+             class="org.rhq.plugins.jmx.MBeanResourceComponent">
+
+        <runs-inside>
+            <parent-resource-type name="JMX Server" plugin="JMX"/>
+        </runs-inside>
+
+        <plugin-configuration>
+            <c:simple-property name="objectName" default="Hadoop:service=JobTracker,name=JobTrackerMetrics"/>
+        </plugin-configuration>
+
+        <metric property="blacklisted_maps"
+                displayName="blacklisted_maps"
+                defaultOn="true"
+                displayType="summary"
+                defaultInterval="600000"
+                units="none"
+                description="blacklisted_maps"/>
+
+        <metric property="blacklisted_reduces"
+                displayName="blacklisted_reduces"
+                defaultOn="true"
+                displayType="summary"
+                defaultInterval="600000"
+                units="none"
+                description="blacklisted_reduces"/>
+
+        <metric property="heartbeats"
+                displayName="heartbeats"
+                defaultOn="true"
+                displayType="summary"
+                defaultInterval="600000"
+                units="none"
+                description="heartbeats"/>
+
+        <metric property="jobs_completed"
+                displayName="jobs_completed"
+                defaultOn="true"
+                displayType="summary"
+                defaultInterval="600000"
+                units="none"
+                description="jobs_completed"/>
+
+        <metric property="jobs_failed"
+                displayName="jobs_failed"
+                defaultOn="true"
+                displayType="summary"
+                defaultInterval="600000"
+                units="none"
+                description="jobs_failed"/>
+
+        <metric property="jobs_killed"
+                displayName="jobs_killed"
+                defaultOn="true"
+                displayType="summary"
+                defaultInterval="600000"
+                units="none"
+                description="jobs_killed"/>
+
+        <metric property="jobs_running"
+                displayName="jobs_running"
+                defaultOn="true"
+                displayType="summary"
+                defaultInterval="600000"
+                units="none"
+                description="jobs_running"/>
+
+        <metric property="trackers"
+                displayName="trackers"
+                defaultOn="true"
+                displayType="summary"
+                defaultInterval="600000"
+                units="none"
+                description="trackers"/>
+
+    </service>
+
+    <service name="JobTracker.jvm"
+             description="JobTracker.jvm"
+             discovery="org.rhq.plugins.jmx.MBeanResourceDiscoveryComponent"
+             class="org.rhq.plugins.jmx.MBeanResourceComponent">
+
+        <runs-inside>
+            <parent-resource-type name="JMX Server" plugin="JMX"/>
+        </runs-inside>
+
+        <plugin-configuration>
+            <c:simple-property name="objectName" default="Hadoop:service=JobTracker,name=jvm"/>
+        </plugin-configuration>
+
+        <metric property="gcCount"
+                displayName="gcCount"
+                defaultOn="true"
+                displayType="summary"
+                defaultInterval="600000"
+                units="none"
+                description="gcCount"/>
+
+        <metric property="gcTimeMillis"
+                displayName="gcTimeMillis"
+                defaultOn="true"
+                displayType="summary"
+                defaultInterval="600000"
+                units="milliseconds"
+                description="gcTimeMillis"/>
+
+        <metric property="memHeapCommittedM"
+                displayName="memHeapCommittedM"
+                defaultOn="true"
+                displayType="summary"
+                defaultInterval="600000"
+                units="megabits"
+                description="memHeapCommittedM"/>
+
+        <metric property="memHeapUsedM"
+                displayName="memHeapUsedM"
+                defaultOn="true"
+                displayType="summary"
+                defaultInterval="600000"
+                units="megabits"
+                description="memHeapUsedM"/>
+
+        <metric property="memNonHeapCommittedM"
+                displayName="memNonHeapCommittedM"
+                defaultOn="true"
+                displayType="summary"
+                defaultInterval="600000"
+                units="megabits"
+                description="memNonHeapCommittedM"/>
+
+        <metric property="memNonHeapUsedM"
+                displayName="memNonHeapUsedM"
+                defaultOn="true"
+                displayType="summary"
+                defaultInterval="600000"
+                units="megabits"
+                description="memNonHeapUsedM"/>
+
+        <metric displayName="tag.context" property="tag.context"
+                description="tag.context"
+                dataType="trait" displayType="summary"/>
+
+        <metric displayName="tag.hostName" property="tag.hostName"
+                description="tag.hostName"
+                dataType="trait" displayType="summary"/>
+
+        <metric displayName="tag.sessionId" property="tag.sessionId"
+                description="tag.sessionId"
+                dataType="trait" displayType="summary"/>
+
+        <metric displayName="tag.processName" property="tag.processName"
+                description="tag.processName"
+                dataType="trait" displayType="summary"/>
+
+    </service>
+
+
+    <!-- TaskTracker -->
+    <service name="TaskTrackerInfo"
+             description="TaskTrackerInfo"
+             discovery="org.rhq.plugins.jmx.MBeanResourceDiscoveryComponent"
+             class="org.rhq.plugins.jmx.MBeanResourceComponent">
+
+        <runs-inside>
+            <parent-resource-type name="JMX Server" plugin="JMX"/>
+        </runs-inside>
+
+        <plugin-configuration>
+            <c:simple-property name="objectName" default="Hadoop:service=TaskTracker,name=TaskTrackerInfo"/>
+        </plugin-configuration>
+
+        <metric displayName="ConfigVersion" property="ConfigVersion"
+                description="ConfigVersion"
+                dataType="trait" displayType="summary"/>
+
+        <metric displayName="Healthy" property="Healthy"
+                description="Healthy"
+                dataType="trait" displayType="summary"/>
+
+        <metric displayName="Hostname" property="Hostname"
+                description="Hostname"
+                dataType="trait" displayType="summary"/>
+
+        <metric displayName="HttpPort" property="HttpPort"
+                description="HttpPort"
+                dataType="trait" displayType="summary"/>
+
+        <metric displayName="JobTrackerUrl" property="JobTrackerUrl"
+                description="JobTrackerUrl"
+                dataType="trait" displayType="summary"/>
+
+        <metric displayName="RpcPort" property="RpcPort"
+                description="RpcPort"
+                dataType="trait" displayType="summary"/>
+
+        <metric displayName="TasksInfoJson" property="TasksInfoJson"
+                description="TasksInfoJson"
+                dataType="trait" displayType="summary"/>
+
+        <metric displayName="Version" property="Version"
+                description="Version"
+                dataType="trait" displayType="summary"/>
+
+    </service>
+
+    <service name="TaskTrackerMetrics"
+             description="TaskTrackerMetrics"
+             discovery="org.rhq.plugins.jmx.MBeanResourceDiscoveryComponent"
+             class="org.rhq.plugins.jmx.MBeanResourceComponent">
+
+        <runs-inside>
+            <parent-resource-type name="JMX Server" plugin="JMX"/>
+        </runs-inside>
+
+        <plugin-configuration>
+            <c:simple-property name="objectName" default="Hadoop:service=TaskTracker,name=TaskTrackerMetrics"/>
+        </plugin-configuration>
+
+        <metric property="mapTaskSlots"
+                displayName="mapTaskSlots"
+                defaultOn="true"
+                displayType="summary"
+                defaultInterval="600000"
+                units="none"
+                description="mapTaskSlots"/>
+
+        <metric property="maps_running"
+                displayName="maps_running"
+                defaultOn="true"
+                displayType="summary"
+                defaultInterval="600000"
+                units="none"
+                description="maps_running"/>
+
+        <metric property="reduceTaskSlots"
+                displayName="reduceTaskSlots"
+                defaultOn="true"
+                displayType="summary"
+                defaultInterval="600000"
+                units="none"
+                description="reduceTaskSlots"/>
+
+        <metric property="tasks_completed"
+                displayName="tasks_completed"
+                defaultOn="true"
+                displayType="summary"
+                defaultInterval="600000"
+                units="none"
+                description="tasks_completed"/>
+
+        <metric property="tasks_failed_ping"
+                displayName="tasks_failed_ping"
+                defaultOn="true"
+                displayType="summary"
+                defaultInterval="600000"
+                units="none"
+                description="tasks_failed_ping"/>
+
+        <metric property="tasks_failed_timeout"
+                displayName="tasks_failed_timeout"
+                defaultOn="true"
+                displayType="summary"
+                defaultInterval="600000"
+                units="none"
+                description="tasks_failed_timeout"/>
+
+        <metric displayName="tag.context" property="tag.context"
+                description="tag.context"
+                dataType="trait" displayType="summary"/>
+
+        <metric displayName="tag.hostName" property="tag.hostName"
+                description="tag.hostName"
+                dataType="trait" displayType="summary"/>
+
+        <metric displayName="tag.sessionId" property="tag.sessionId"
+                description="tag.sessionId"
+                dataType="trait" displayType="summary"/>
+
+    </service>
+
+    <service name="TaskTracker.jvm"
+             description="TaskTracker.jvm"
+             discovery="org.rhq.plugins.jmx.MBeanResourceDiscoveryComponent"
+             class="org.rhq.plugins.jmx.MBeanResourceComponent">
+
+        <runs-inside>
+            <parent-resource-type name="JMX Server" plugin="JMX"/>
+        </runs-inside>
+
+        <plugin-configuration>
+            <c:simple-property name="objectName" default="Hadoop:service=TaskTracker,name=jvm"/>
+        </plugin-configuration>
+
+        <metric property="gcCount"
+                displayName="gcCount"
+                defaultOn="true"
+                displayType="summary"
+                defaultInterval="600000"
+                units="none"
+                description="gcCount"/>
+
+        <metric property="gcTimeMillis"
+                displayName="gcTimeMillis"
+                defaultOn="true"
+                displayType="summary"
+                defaultInterval="600000"
+                units="milliseconds"
+                description="gcTimeMillis"/>
+
+        <metric property="memHeapCommittedM"
+                displayName="memHeapCommittedM"
+                defaultOn="true"
+                displayType="summary"
+                defaultInterval="600000"
+                units="megabits"
+                description="memHeapCommittedM"/>
+
+        <metric property="memHeapUsedM"
+                displayName="memHeapUsedM"
+                defaultOn="true"
+                displayType="summary"
+                defaultInterval="600000"
+                units="megabits"
+                description="memHeapUsedM"/>
+
+        <metric property="memNonHeapCommittedM"
+                displayName="memNonHeapCommittedM"
+                defaultOn="true"
+                displayType="summary"
+                defaultInterval="600000"
+                units="megabits"
+                description="memNonHeapCommittedM"/>
+
+        <metric property="memNonHeapUsedM"
+                displayName="memNonHeapUsedM"
+                defaultOn="true"
+                displayType="summary"
+                defaultInterval="600000"
+                units="megabits"
+                description="memNonHeapUsedM"/>
+
+        <metric displayName="tag.context" property="tag.context"
+                description="tag.context"
+                dataType="trait" displayType="summary"/>
+
+        <metric displayName="tag.hostName" property="tag.hostName"
+                description="tag.hostName"
+                dataType="trait" displayType="summary"/>
+
+        <metric displayName="tag.sessionId" property="tag.sessionId"
+                description="tag.sessionId"
+                dataType="trait" displayType="summary"/>
+
+        <metric displayName="tag.processName" property="tag.processName"
+                description="tag.processName"
                 dataType="trait" displayType="summary"/>
 
     </service>
