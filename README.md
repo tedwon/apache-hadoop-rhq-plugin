@@ -4,6 +4,7 @@ hadoop-rhq-plugin
 RHQ Plugin for Apache Hadoop 1.0.3
 
 Build Plugin
+-------------------
 
 mvn clean package
 
@@ -12,6 +13,7 @@ apache-hadoop-rhq-plugin/target/apache-hadoop-plugin-0.1-SNAPSHOT.jar
 
 
 Install Plugin
+-------------------
 
 http://localhost:7080/coregui/#Administration/Configuration/AgentPlugins
 
@@ -19,12 +21,14 @@ http://localhost:7080/coregui/#Administration/Configuration/AgentPlugins
 
 
 Prerequisites
+-------------------
 
 You have to enable hadoop jmx metrics first.
 
 Edit two files in conf dir as below.
 
 conf/hadoop-env.sh
+-------------------
 
 export JMX_OPTS="-Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.port"
 
@@ -42,6 +46,7 @@ export HADOOP_TASKTRACKER_OPTS="$JMX_OPTS=18009 $HADOOP_TASKTRACKER_OPTS"
 
 
 conf/hadoop-metrics.properties
+-------------------
 
 
 dfs.class=org.apache.hadoop.metrics.spi.NullContextWithUpdateThread
@@ -63,6 +68,7 @@ rpc.period=10
 
 
 Check enabled
+-------------------
 
 http://namenode:50070/jmx
 
